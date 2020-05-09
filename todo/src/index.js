@@ -1,27 +1,6 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import AppHeader from './components/AppHeader/AppHeader';
-import TodoList from './components/TodoList/TodoList';
-import SearchPanel from './components/SearchPanel/SearchPanel';
-
-const App = () => {
-
-    const todoData = [
-        {label: 'Drink Coffee', important: false, id: 1},
-        {label: 'Make Awesome App', important: true, id: 2},
-        {label: 'Have a lunch', important: false, id: 3},
-    ]
-
-    return (
-        <div>
-            <span> {(new Date()).toLocaleString()} </span>
-            <AppHeader />
-            <SearchPanel />
-            {/* todoData передается как props */}
-            <TodoList todos={todoData} />
-        </div>
-    );
-};
+import App from './components/App';
 
 ReactDom.render(<App />, document.getElementById('root'));

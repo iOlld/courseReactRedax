@@ -1,6 +1,6 @@
 import React from 'react';
-
-import TodoListItem from './TodoListItem/TodoListItem';
+import TodoListItem from '../TodoListItem';
+import './TodoList.css';
 
 // todos получаем с помощью деструктуризации, вместо props.todos пишем { todos }
 const TodoList = ( { todos } ) => {
@@ -13,12 +13,14 @@ const TodoList = ( { todos } ) => {
         return (
             // <li key={item.id} ><TodoListItem label={itemProps.label} important={itemProps.important} /></li>
             // spread оператор для объекта, запись аналогична записи выше, но в разы меньше
-            <li key={item.id} ><TodoListItem {...itemProps} /></li>
+            <li key={item.id} className="list-group-item" >
+                <TodoListItem {...itemProps} />
+            </li>
         )
     })
 
     return (
-        <ul>
+        <ul className="list-group TodoList">
             {elements}
         </ul>
     );
