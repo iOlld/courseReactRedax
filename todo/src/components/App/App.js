@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import AppHeader from '../AppHeader'
 import TodoList from '../TodoList';
@@ -7,26 +7,47 @@ import ItemStatusFilter from '../ItemStatusFilter';
 
 import './App.css';
 
-const App = () => {
+export default class App extends Component {
+    
+    constructor() {
+        super();
+        this.state = {
+            todoData: [
+                {label: 'Drink Coffee', important: false, id: 1},
+                {label: 'Make Awesome App', important: true, id: 2},
+                {label: 'Have a lunch', important: false, id: 3},
+            ],
+        }
+    }
 
-    const todoData = [
-        {label: 'Drink Coffee', important: false, id: 1},
-        {label: 'Make Awesome App', important: true, id: 2},
-        {label: 'Have a lunch', important: false, id: 3},
-    ]
+    deleteItem = (id) => {
+        this.setState( ( { todoData } ) => {
+            const idx = todoData.findIndex( (el) => el.id === id );
 
-    return (
-        <div className="todo-app">
-            <AppHeader toDo={1} done={3} />
-            <div className="top-panel d-flex">
-                <SearchPanel />
-                <ItemStatusFilter />
+            const newArray = [
+                ...todoData.slice(0, idx), 
+                ...todoData.slice(idx + 1)
+            ];
+            return {
+                todoData: newArray
+            }
+        } )
+    };
+
+    render() {
+        return (
+            <div className="todo-app">
+                <AppHeader toDo={1} done={3} />
+                <div className="top-panel">
+                    <SearchPanel />
+                    <ItemStatusFilter />
+                </div>
+    
+                {/* todoData передается как props классу TodoList */}
+                <TodoList 
+                    todos={this.state.todoData}
+                    onDeleted={ this.deleteItem }/>
             </div>
-
-            {/* todoData передается как props */}
-            <TodoList todos={todoData} />
-        </div>
-    );
+        );
+    }
 };
-
-export default App;
