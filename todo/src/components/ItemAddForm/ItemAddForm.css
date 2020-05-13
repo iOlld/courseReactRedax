@@ -1,0 +1,17 @@
+.ItemAddForm{
+    margin-top: 10px;
+}
+
+.ItemAddForm input{
+    margin-right: 3px;
+}
+
+.ItemAddForm button{
+    width: max-content;
+}
+
+.ItemAddForm .new-todo-label {
+    width: auto;
+    flex-grow: 1;
+    margin-right: 3px;
+}
