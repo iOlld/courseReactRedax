@@ -10,7 +10,7 @@ import './App.css';
 
 export default class App extends Component {
     
-    maxId = 1;
+    // maxId = 1;
     constructor() {
         super();
         this.state = {
@@ -22,6 +22,7 @@ export default class App extends Component {
             term: '',
             filter: 'all',
         };
+        
     }
 
     // создание элемента
@@ -30,7 +31,8 @@ export default class App extends Component {
             label,
             important: false,
             done: false,
-            id: this.maxId++
+            id: this.randomID(), // добавил рандомный id
+            // id: this.maxId++
         }
     }
 
@@ -105,11 +107,12 @@ export default class App extends Component {
         if(term.length === 0) return items;
 
         return items.filter((item) => {
-            return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
-            // return item.label.toLowerCase().trim().indexOf(term.toLowerCase().trim()) > -1;
+            // return item.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+            return item.label.toLowerCase().trim().indexOf(term.toLowerCase().trim()) > -1;
         });
     };
 
+    // выбранный фильтр
     filter = (items, filter) => {
 
         switch (filter) {
@@ -124,6 +127,36 @@ export default class App extends Component {
         }
 
     }
+
+    // то что я добавил
+    // случайное id
+    randomID = () => {
+        const min = 0;
+        const max = 1000000; // ну чтоб точно не повторилось
+        let rand = min - 0.5 + Math.random() * (max - min + 1);
+        return Math.round(rand);
+    }
+
+    // запись в LS
+    saveToLocalStorage = () => {
+        localStorage.setItem('todoData', JSON.stringify(this.state.todoData));
+    }
+    
+    // проверкаа LS
+    checkFunk = () => {
+        if (JSON.parse(localStorage.getItem('todoData')) !== null) this.setState({ todoData: JSON.parse(localStorage.getItem('todoData'))})
+    }
+
+    // проверкаа LS
+    componentDidMount() {
+        this.checkFunk();
+    }
+
+    // запись в LS
+    componentDidUpdate() {
+        this.saveToLocalStorage();
+    }
+    // все!
 
     render() {
 
@@ -154,6 +187,7 @@ export default class App extends Component {
                     onToggleImportant={this.onToggleImportant}
                     onToggleDone={this.onToggleDone}/>
                 <ItemAddForm onItemAdded={this.addItem} />
+                {/* <ItemAddForm onItemAdded={this.addItem} saveToLocalStorage={this.saveToLocalStorage} /> */}
             </div>
         );
     }

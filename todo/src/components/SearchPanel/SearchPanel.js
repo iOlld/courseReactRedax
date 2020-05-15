@@ -20,7 +20,8 @@ export default class SearchPanel extends Component {
     render() {
         return <input className="form-control search-input"
                         type="text"
-                        placeholder="Type here to search"
+                        placeholder="Поиск по названию"
+                        // placeholder="Type here to search"
                         value={this.state.term}
                         onChange={this.onSearchChange} />;
 

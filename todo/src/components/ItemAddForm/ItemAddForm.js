@@ -8,6 +8,7 @@ export default class ItemAddForm extends Component {
         super();
         this.state = {
             label: '',
+            placeholder: 'Что нужно сделать',
         }
     }
 
@@ -15,13 +16,22 @@ export default class ItemAddForm extends Component {
         this.setState({label: event.target.value});
     }
 
+    // добавил проверку на пустое поле ввода
     onSubmit = (event) => {
         event.preventDefault();
-        this.props.onItemAdded(this.state.label);
-        this.setState({label: ''});
+        if (this.state.label.trim() !== '') {
+            this.props.onItemAdded(this.state.label);
+            this.setState({label: ''});
+            this.setState( { placeholder: 'Что нужно сделать' } );
+        } else {
+            this.setState( { placeholder: 'Нужно заполнить поле' } );
+        }
     }
 
     render () {
+
+        const { label, placeholder } = this.state;
+
         return (
             <form className="ItemAddForm d-flex"
                     onSubmit={this.onSubmit}>
@@ -29,11 +39,12 @@ export default class ItemAddForm extends Component {
                 <input type="text"
                         className="form-control"
                         onChange={this.onLabelChange}
-                        placeholder="Whats needs to be done"
-                        value={this.state.label}/>
+                        placeholder={placeholder}
+                        // placeholder="Whats needs to be done"
+                        value={label}/>
                 <div>
-                    <button className="btn btn-outline-secondary">
-                        Add item
+                    <button className="btn btn-outline-secondary" >
+                        ADD
                     </button>
                 </div>
             </form>
