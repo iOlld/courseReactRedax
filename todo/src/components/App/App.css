@@ -1,6 +1,5 @@
 .todo-app {
-    margin: 2rem auto 0 auto;
-    max-width: 400px;
+    min-width: 310px;
 }
 
 .top-panel {
@@ -8,5 +7,4 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    /* justify-content: center; */
 }

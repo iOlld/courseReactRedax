@@ -3,3 +3,9 @@
     flex-grow: 1;
     margin-right: 3px;
 }
+
+@media (max-width: 575.98px) {
+    .search-input {
+        margin-right: 0px;
+    }
+}

@@ -12,6 +12,12 @@
     line-height: 35px;
     cursor: pointer;
     user-select: none;
+    display: inline-block;
+    width: 75%;
+    
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis; /* Добавляем многоточие */
 }
 
 .TodoListItem.done .TodoListItem-label {
@@ -21,4 +27,29 @@
 .TodoListItem.important .TodoListItem-label {
     font-weight: bold;
     color: steelblue;
+}
+
+
+@media (max-width: 575.98px) { 
+
+    .TodoListItem-label{
+        margin-left: 0.25rem;
+    }
+    
+}
+
+@media (max-width: 380.98px) { 
+
+    .TodoListItem-label{
+        width: 70%;
+    }
+    
+}
+
+@media (max-width: 320.98px) { 
+
+    .TodoListItem-label{
+        width: 68%;
+    }
+    
 }

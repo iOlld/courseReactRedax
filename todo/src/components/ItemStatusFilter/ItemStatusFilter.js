@@ -5,9 +5,9 @@ import './ItemStatusFilter.css';
 export default class ItemStatusFilter extends Component {
 
     buttons = [
-        {name: 'all', label: 'All'},
-        {name: 'active', label: 'Active'},
-        {name: 'done', label: 'Done'},
+        {name: 'all', label: 'Все'},
+        {name: 'active', label: 'Активные'},
+        {name: 'done', label: 'Выполненные'},
     ]
 
     render () {
@@ -28,7 +28,7 @@ export default class ItemStatusFilter extends Component {
         })
 
         return (
-            <div className="btn-group">
+            <div className="btn-group my-btn-group">
                 {buttons}
             </div>
         );

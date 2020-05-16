@@ -15,9 +15,9 @@ export default class App extends Component {
         super();
         this.state = {
             todoData: [
-                this.createTodoItem('Drink Coffee'),
-                this.createTodoItem('Make Awesome App'),
-                this.createTodoItem('Have a lunch'),
+                this.createTodoItem('Выпить кофе'),
+                this.createTodoItem('Cделать классное приложение'),
+                this.createTodoItem('Пообедать'),
             ],
             term: '',
             filter: 'all',
@@ -171,7 +171,7 @@ export default class App extends Component {
         const todoCount = todoData.length - doneCount;
 
         return (
-            <div className="todo-app">
+            <div className="todo-app container">
                 <AppHeader toDo={todoCount} done={doneCount} />
                 <div className="top-panel">
                     <SearchPanel onSearchChange={this.onSearchChange} />

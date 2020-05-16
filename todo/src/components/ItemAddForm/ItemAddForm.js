@@ -44,7 +44,7 @@ export default class ItemAddForm extends Component {
                         value={label}/>
                 <div>
                     <button className="btn btn-outline-secondary" >
-                        ADD
+                        Добавить
                     </button>
                 </div>
             </form>
