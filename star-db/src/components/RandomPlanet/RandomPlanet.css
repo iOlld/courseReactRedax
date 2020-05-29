@@ -22,3 +22,15 @@
 .RandomPlanet .list-group-item .term {
     margin-right: .5rem;
 }
+
+@media (max-width: 575.98px) {
+    .RandomPlanet{
+        flex-direction: column;
+    }
+    .RandomPlanet h4{
+        margin-top: 1.5rem;
+    }
+    .RandomPlanet .list-group{
+        margin-left: 0;
+    }
+}

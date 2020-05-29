@@ -18,3 +18,15 @@
 .PersonDetails .list-group-item .term{
     margin-right: .5rem;
 }
+
+@media (max-width: 575.98px) {
+    .PersonDetails{
+        flex-direction: column;
+    }
+    .PersonDetails h4{
+        margin-top: .5rem;
+    }
+    .PersonDetails .card-body{
+        padding-left: 0;
+    }
+}
