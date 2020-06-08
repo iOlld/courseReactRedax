@@ -11,16 +11,10 @@ export default class RandomPlanet extends Component {
 
     swapiService = new SwapiService();
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            planet: {},
-            loading: true,
-            error: false,
-        }
-
-        this.updatePlanet();
-
+    state = {
+        planet: {},
+        loading: true,
+        error: false,
     }
 
     onPlanetLoaded = (planet) => {
@@ -45,10 +39,14 @@ export default class RandomPlanet extends Component {
             .catch(this.onError);
     }
 
-    componentDidUpdate() {
-        setTimeout( () => {
-            this.updatePlanet();
-        },6000);
+    componentDidMount() {
+        this.updatePlanet();
+        // setInterval( this.updatePlanet, 3000); // ???
+        this.interval = setInterval( this.updatePlanet, 3000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
 
     render() {
