@@ -3,14 +3,21 @@ import React, { Component } from 'react';
 // импорт bootswatch
 import 'bootswatch/dist/darkly/bootstrap.min.css';
 
+import './App.css';
+
 import Header from '../Header';
 import RandomPlanet from '../RandomPlanet';
 
-import './App.css';
 import ErrorIndicator from '../ErrorIndicator';
 import PeoplePage from '../PeoplePage';
 
+// import ItemList from '../ItemList';
+// import PersonDetails from '../PersonDetails';
+import SwapiService from '../../services/SwapiService';
+
 export default class App extends Component {
+
+    swapiService = new SwapiService();
 
     state = {
         hasError: false
@@ -32,6 +39,7 @@ export default class App extends Component {
                 <Header />
                 <RandomPlanet />
                 <PeoplePage />
+                
             </div>
         )
     }

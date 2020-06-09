@@ -6,7 +6,7 @@ export default class SwapiService {
 
     _apiBase = 'https://swapi.dev/api';
 
-    async getResourse (url) {
+    getResourse = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
         
         if(!res.ok) throw new Error(`Could not fetch ${url} , received ${res.status}`);
@@ -15,69 +15,69 @@ export default class SwapiService {
     }
 
     // персонажи
-    async getAllPeople () {
+    getAllPeople = async () => {
         const res = await this.getResourse(`/people/`);
         return res.results.map(this._transformPerson);
     }
 
-    async getPerson (id) {
+    getPerson = async (id) => {
         const person = await this.getResourse(`/people/${id}/`);
         return this._transformPerson(person);
     }
 
     // планеты
-    async getAllPlanets () {
+    getAllPlanets = async () => {
         const res = await this.getResourse(`/planets/`);
         return res.results.map(this._transformPlanet);
     }
 
-    async getPlanet (id) {
+    getPlanet = async (id) => {
         const planet = await this.getResourse(`/planets/${id}/`);
         return this._transformPlanet(planet)
     }
 
     // корабли
-    async getAllStarships () {
+    getAllStarships = async () => {
         const res = await this.getResourse(`/starships/`);
         return res.results.map(this._transformStarship);
     }
 
-    async getStarship (id) {
+    getStarship = async (id) => {
         const starship = await this.getResourse(`/starships/${id}/`);
         return this._transformStarship(starship);
     }
 
-    // транспортные средства
-    async getAllVehicles () {
-        const res = await this.getResourse(`/vehicles/`);
-        return res.results;
-    }
+    // // транспортные средства
+    // getAllVehicles = async () => {
+    //     const res = await this.getResourse(`/vehicles/`);
+    //     return res.results;
+    // }
 
-    getVehicle (id) {
-        return this.getResourse(`/vehicles/${id}/`);
-    }
+    // getVehicle (id) {
+    //     return this.getResourse(`/vehicles/${id}/`);
+    // }
 
-    // виды
-    async getAllSpecies () {
-        const res = await this.getResourse(`/species/`);
-        return res.results;
-    }
+    // // виды
+    // async getAllSpecies () {
+    //     const res = await this.getResourse(`/species/`);
+    //     return res.results;
+    // }
 
-    getSpecies (id) {
-        return this.getResourse(`/species/${id}/`);
-    }
+    // getSpecies (id) {
+    //     return this.getResourse(`/species/${id}/`);
+    // }
     
-    // фильмы
-    async getAllFilms () {
-        const res = await this.getResourse(`/films/`);
-        return res.results;
-    }
+    // // фильмы
+    // async getAllFilms () {
+    //     const res = await this.getResourse(`/films/`);
+    //     return res.results;
+    // }
 
-    getFilm (id) {
-        return this.getResourse(`/films/${id}/`);
-    }
+    // getFilm (id) {
+    //     return this.getResourse(`/films/${id}/`);
+    // }
 
-    _extractId (item) {
+    _extractId = (item) => {
         const idRegEx = /\/([0-9]*)\/$/;
         return item.url.match(idRegEx)[1];
     }
@@ -98,11 +98,11 @@ export default class SwapiService {
             name: starship.name,
             model: starship.model,
             manufacturer: starship.manufacturer,
-            costInCredits: starship.costInCredits,
+            costInCredits: starship.cost_in_credits,
             length: starship.length,
             crew: starship.crew,
             passengers: starship.passengers,
-            cargoCapacity: starship.cargoCapacity
+            cargoCapacity: starship.cargo_capacity
         }
     }
 
@@ -111,8 +111,8 @@ export default class SwapiService {
             id: this._extractId(person),
             name: person.name,
             gender: person.gender,
-            birthYear: person.birthYear,
-            eyeColor: person.eyeColor
+            birthYear: person.birth_year,
+            eyeColor: person.eye_color
         }
     }
 
@@ -123,7 +123,7 @@ export default class SwapiService {
 // swapi.getPlanet(2).then(data => console.log(data))
 
 
-// swapi.getPerson(35).then(p => {
+// swapi.getPerson(5).then(p => {
 //     console.log(p)
 //   // people.forEach((p) => {
 //   //   console.log(p.name);
