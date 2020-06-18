@@ -1,57 +1,34 @@
 import React, { Component } from 'react';
 
 import './ItemList.css';
-// import SwapiService from '../../services/SwapiService';
-import Spinner from '../Spinner';
+import { WithData } from '../HocHelpers';
+import SwapiService from '../../services/SwapiService';
 
-export default class ItemList extends Component {
+const ItemList = (props) => {
 
-    state = {
-        itemList: null
-    }
+    const { data, onItemSelected, children: renderLabel } = props;
 
-    componentDidMount() {
+    const items = data.map((item) => {
 
-        const { getData } = this.props;
+        const { id } = item;
+        const label = renderLabel(item); // Вызываем "анонимную функцию" в PeoplePage на 39-й строке
 
-        getData()
-            .then((itemList) => {
-                this.setState({
-                    itemList
-                });
-            });
-    }
+        return (
+            <li className="list-group-item"
+                key={id}
+                onClick={() => onItemSelected(id)}>
+                {label}
+            </li>
+        );
+    });
 
-    renderItems(arr) {
-        return arr.map((item) => {
+    return(
+        <ul className="ItemList list-group">
+            {items}
+        </ul>
+    )
+};
 
-            const { id } = item;
-            const label = this.props.children(item); // Вызываем "анонимную функцию" в PeoplePage на 39-й строке
+const { getAllPeople } = new SwapiService();
 
-            return (
-                <li className="list-group-item"
-                    key={id}
-                    onClick={() => this.props.onItemSelected(id)}>
-                    {label}
-                </li>
-            )
-        })
-    }
-
-    render() {
-
-        const { itemList } = this.state;
-
-        if (!itemList) {
-            return <Spinner />
-        }
-
-        const items = this.renderItems(itemList);
-
-        return(
-            <ul className="ItemList list-group">
-                {items}
-            </ul>
-        )
-    }
-}
+export default WithData(ItemList, getAllPeople);
